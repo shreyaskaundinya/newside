@@ -4,6 +4,7 @@ import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 import styled from 'styled-components';
 import { Text } from '@geist-ui/react';
+import { mediaQuery } from '../utils/mediaQuery';
 
 function Auth(props) {
     return (
@@ -27,5 +28,12 @@ export default Auth;
 const Container = styled.div`
     display: flex;
     justify-content: space-around;
+
     width: 100%;
+
+    ${mediaQuery('sm')} {
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 3rem;
+    }
 `;

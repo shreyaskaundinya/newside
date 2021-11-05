@@ -1,28 +1,23 @@
 import React from 'react';
-import { Input, Button, Spacer } from '@geist-ui/react';
-
+import Card from '@geist-ui/react/esm/card';
+import Input from '@geist-ui/react/esm/input';
+import Button from '@geist-ui/react/esm/button';
 import styled from 'styled-components';
 
-function SignUp(props) {
+function SignUp() {
     return (
-        <div>
-            <h3>Sign Up</h3>
-            <Form action='' method=''>
-                <Input label='Username' width='100%' />
-
-                <Input
-                    labelRight='@gmail.com'
-                    placeholder='Email Id'
-                    width='100%'
-                />
-
-                <Input.Password label='Password' width='100%' />
-                <Input.Password label='Confirm Password' width='100%' />
-
-                <Button type='success'>Sign Up</Button>
-                <Spacer h={0.5} />
-            </Form>
-        </div>
+        <Card shadow>
+            <Card.Content>
+                <h3>Sign Up</h3>
+                <Form action='' method=''>
+                    <Input label='Name' width='100%' name='name' />
+                    <Input label='Username' width='100%' name='username' />
+                    <Input.Password label='Password' width='100%' />
+                    <Input.Password label='Confirm Password' width='100%' />
+                    <Button type='success'>Sign Up</Button>
+                </Form>
+            </Card.Content>
+        </Card>
     );
 }
 export default SignUp;
