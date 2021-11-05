@@ -4,8 +4,12 @@ import styled from 'styled-components';
 import NewsSlides from '../components/NewsSlides';
 import Weather from '../components/Weather';
 import BasePage from './BasePage';
+import { motion } from 'framer-motion';
+import { news } from '../utils/sampleNews';
+import { useHistory } from 'react-router-dom';
 
-function Home(props) {
+function Home() {
+    const history = useHistory();
     return (
         <BasePage>
             <HeroContainer>
@@ -14,7 +18,9 @@ function Home(props) {
                 </Text>
                 <Text p>We aggregate news and provide you the summary!</Text>
 
-                <Button type='success'>Create an account now!</Button>
+                <Button type='success' onClick={() => history.push('/auth')}>
+                    Create an Account now!
+                </Button>
             </HeroContainer>
             <Spacer h={4} />
             <Section>
@@ -22,13 +28,11 @@ function Home(props) {
             </Section>
             <Spacer h={4} />
             <Section>
-                <Text h4>Breaking News</Text>
-                <NewsSlides />
+                <NewsSlides title='Breaking News' limit={9} articles={news} />
             </Section>
             <Spacer h={4} />
             <Section>
-                <Text h4>Trending News</Text>
-                <NewsSlides />
+                <NewsSlides title='Trending News' limit={6} articles={news} />
             </Section>
         </BasePage>
     );
@@ -36,7 +40,7 @@ function Home(props) {
 
 export default Home;
 
-const HeroContainer = styled.div`
+const HeroContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
     align-items: center;

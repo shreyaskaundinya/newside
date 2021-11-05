@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import BasePage from './BasePage';
 import NewsSlides from '../components/NewsSlides';
 import { Divider, Text } from '@geist-ui/react';
+import { news } from '../utils/sampleNews';
 
 function Bookmarks() {
     return (
@@ -10,7 +11,7 @@ function Bookmarks() {
             <Text h1>Bookmarks</Text>
             <Divider y={0} style={{ marginBottom: '2rem' }} />
             <Section>
-                <NewsSlides />
+                <NewsSlides title='' limit={100} articles={news} />
             </Section>
         </BasePage>
     );

@@ -1,0 +1,8 @@
+{
+    "isProd": false,
+    "app": {
+        "PORT": 4000,
+        "secretKey": "agagagagagadgaagd",
+        "whitelist": ["http://localhost:3000", "https://www.thunderclient.io"]
+    }
+}
