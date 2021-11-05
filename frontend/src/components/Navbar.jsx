@@ -1,9 +1,9 @@
 import {
+    Avatar,
     Button,
     Divider,
     Drawer,
     Input,
-    Select,
     Spacer,
     Text,
 } from '@geist-ui/react';
@@ -20,6 +20,7 @@ function Navbar() {
     const [state, setState] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [placement, setPlacement] = useState('');
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 475);
     // const { isMobile } = useResponsiveWindow();
 
     const open = (text) => {
@@ -44,13 +45,29 @@ function Navbar() {
                     <AlignJustify onClick={() => open('left')} />
                     <Image
                         src='https://fontmeme.com/permalink/211102/f10cb435a58b8d131a961b0b8f1c3feb.png'
-                        width='50px'
+                        width={!isMobile ? '50px' : '40px'}
                         style={{ margin: 0 }}
                     />
-                    <Text h3 style={{ margin: 0, color: 'white' }}>
-                        NewSide
+                    <Text
+                        p
+                        style={{
+                            margin: 0,
+                            color: 'white',
+                            fontSize: isMobile ? '1em' : '1.4em',
+                        }}>
+                        <strong>NewSide</strong>
                     </Text>
                 </Logo>
+                <User>
+                    <Avatar text='A' />
+                    {!isMobile ? (
+                        <Text p style={{ color: 'white' }}>
+                            User
+                        </Text>
+                    ) : (
+                        <></>
+                    )}
+                </User>
             </Nav>
             <StyledDrawer
                 visible={state}
@@ -113,10 +130,7 @@ function Navbar() {
                             </StyledNavLink>
                         </Text>
                         <Spacer h={4} />
-                        <Button
-                            type='success-light'
-                            width={'100%'}
-                            onClick={() => {}}>
+                        <Button type='success-light' width={'100%'}>
                             <StyledNavLink
                                 style={{ color: 'white' }}
                                 to='/auth'
@@ -156,6 +170,16 @@ const Logo = styled.div`
     display: flex;
     align-items: center;
     gap: 2rem;
+
+    ${mediaQuery('sm')} {
+        gap: 1rem;
+    }
+`;
+
+const User = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 `;
 
 const Nav = styled.div`
@@ -163,8 +187,11 @@ const Nav = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
 
+    ${mediaQuery('sm')} {
+        padding: 0.5rem 1rem;
+    }
     /* box-shadow: 1px 1px 1px 1px lightgray; */
 `;
 
