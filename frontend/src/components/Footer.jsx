@@ -1,20 +1,28 @@
 import React from 'react';
-import { Card, Text, Divider, Link } from '@geist-ui/react';
+import { Text, Divider, Link, Image } from '@geist-ui/react';
 import styled from 'styled-components';
-function Footer(props) {
-    const topics = ['News', 'Business', 'Sports', 'Tech', 'Crypto', 'Movies'];
+
+function Footer() {
+    const topics = ['News', 'Business', 'Sports'];
+    const topics1 = ['Tech', 'Crypto', 'Movies'];
 
     return (
         <FooterContainer>
             <div>
-                <Text p style={{ textAlign: 'center' }}>
-                    NEWSIDE
-                </Text>
-                <Divider y={0} />
+                <Logo>
+                    <Image
+                        src='https://fontmeme.com/permalink/211102/f10cb435a58b8d131a961b0b8f1c3feb.png'
+                        width='50px'
+                    />
+                </Logo>
+
+                <Divider y={0} h={2} />
 
                 <Row>
                     <Col>
-                        <Text p>Some links: </Text>
+                        <Text p>
+                            <strong>LINKS</strong>
+                        </Text>
                         <Text p style={{ fontSize: '0.9em' }}>
                             <Link>About us</Link>
                         </Text>
@@ -23,8 +31,19 @@ function Footer(props) {
                         </Text>
                     </Col>
                     <Col>
-                        <Text>Trending Topics : </Text>
+                        <Text style={{ paddingLeft: '50px' }}>
+                            <strong>TRENDING TOPICS</strong>
+                        </Text>
                         {topics.map((topic) => (
+                            <Text p style={{ fontSize: '0.9em' }}>
+                                <Link to={`/topic/${topic.toLowerCase()}`}>
+                                    # {topic}
+                                </Link>
+                            </Text>
+                        ))}
+                    </Col>
+                    <Col style={{ paddingTop: '25px', paddingLeft: '6px' }}>
+                        {topics1.map((topic) => (
                             <Text p style={{ fontSize: '0.9em' }}>
                                 <Link to={`/topic/${topic.toLowerCase()}`}>
                                     # {topic}
@@ -44,6 +63,7 @@ const FooterContainer = styled.div`
     width: 100%;
     background-color: black;
     color: white;
+    padding: 2rem 0;
 `;
 
 const Row = styled.div`
@@ -63,4 +83,9 @@ const Col = styled.div`
     p {
         margin: 0;
     }
+`;
+
+const Logo = styled.div`
+    padding-bottom: 1rem;
+    display: flex;
 `;
