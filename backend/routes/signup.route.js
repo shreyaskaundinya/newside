@@ -12,10 +12,10 @@ const notSupported = (req, res, next) => {
 
 async function addNewUser(req, res) {
     const data = req.body.data;
-
     // check for duplicate username
     try {
         const userFound = await User.findOne({ username: data.username });
+        // console.log(data);
         if (userFound.username) {
             return res
                 .status(400)
@@ -30,7 +30,7 @@ async function addNewUser(req, res) {
 
         const newUser = await User.create(data);
         newUser.save();
-        return res.status(200).json({ status: 200, data: { newUser } });
+        return res.status(200).json({ status: 200, data: { user } });
     } catch (error) {
         return res.status(400).json({ status: 400, err: 'ERROR' });
     }
