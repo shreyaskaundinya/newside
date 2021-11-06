@@ -1,20 +1,44 @@
-import React from 'react';
+import React, { useRef } from 'react';
 // import styled from 'styled-components';
 import BasePage from './BasePage';
 import { Button, Card, Divider, Input, Link, Text } from '@geist-ui/react';
 import Topics from '../components/Topics';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { news } from '../utils/sampleNews';
+// import { news } from '../utils/sampleNews';
 
-import { find } from 'lodash';
+// import { find } from 'lodash';
 import { Bookmark, Globe, Send } from '@geist-ui/react-icons';
 import Comments from '../components/Comments';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAddArticleCommentMutation } from '../store/api/appApi';
+import { addComment } from '../store/slices/articlesSlice';
 
 function Article() {
     const { id } = useParams();
-    const article = find(news, { _id: id });
+    const user = useSelector((state) => state.user.user);
+    const article = useSelector((state) =>
+        state.articles.articles.find((a) => a._id === id)
+    );
+    const [addArticleComment, { isLoading }] = useAddArticleCommentMutation();
+    const commentform = useRef();
+    const dispatch = useDispatch();
+
     const datestring = new Date(article.published_date).toDateString();
+
+    const handleAddComment = async (e) => {
+        e.preventDefault();
+        const data = {
+            userId: user._id,
+            username: user.username,
+            articleId: article._id,
+            comment: new FormData(commentform.current).get('comment'),
+        };
+        const comment = await addArticleComment(data);
+        // console.log(comment);
+        dispatch(addComment(data));
+    };
+
     return (
         <BasePage>
             <Container>
@@ -71,18 +95,26 @@ function Article() {
                                 <Text p>
                                     <strong>Add a comment</strong>
                                 </Text>
-                                <CommentForm>
+                                <CommentForm
+                                    method='POST'
+                                    onSubmit={handleAddComment}
+                                    ref={commentform}>
                                     <Input
                                         placeholder='Comment'
                                         width={'100%'}
+                                        name='comment'
                                     />
 
-                                    <Button type='success' icon={<Send />} auto>
+                                    <Button
+                                        type='success'
+                                        icon={<Send />}
+                                        auto
+                                        htmlType='submit'>
                                         Comment
                                     </Button>
                                 </CommentForm>
                             </CommentFormContainer>
-                            <Comments />
+                            <Comments articleId={article._id} />
                         </NewsComments>
                     </Card.Footer>
                 </Card>
@@ -120,7 +152,7 @@ const CommentFormContainer = styled.div`
     padding: 1rem 0;
 `;
 
-const CommentForm = styled.div`
+const CommentForm = styled.form`
     display: flex;
     gap: 1rem;
 `;

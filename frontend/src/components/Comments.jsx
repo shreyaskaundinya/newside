@@ -1,20 +1,27 @@
+import { Loading } from '@geist-ui/react';
 import React from 'react';
-import { comments } from '../utils/sampleComments';
+import { useGetArticleCommentsQuery } from '../store/api/appApi';
+// import { comments } from '../utils/sampleComments';
 import Comment from './Comment';
 
-function Comments(props) {
+function Comments({ articleId }) {
+    const { data, isLoading } = useGetArticleCommentsQuery(articleId);
+    console.log('commentss', data);
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div>
             <h5>
-                <span>{comments.length}</span> Comment
-                {comments.length > 0 ? 's' : ''}
+                <span>{data?.comments?.length}</span> Comment
+                {data?.length > 0 ? 's' : ''}
             </h5>
 
-            {comments.length === 0 && !props.loading ? (
+            {data?.comments.length === 0 ? (
                 <div>Be the first to comment</div>
             ) : null}
 
-            {comments.map((comment, index) => (
+            {data?.comments?.map((comment, index) => (
                 <Comment key={index} comment={comment} />
             ))}
         </div>

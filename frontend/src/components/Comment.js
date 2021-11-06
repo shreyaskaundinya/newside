@@ -1,4 +1,4 @@
-import { Avatar, Divider, Text } from '@geist-ui/react';
+import { Avatar, Text } from '@geist-ui/react';
 import React from 'react';
 import styled from 'styled-components';
 
