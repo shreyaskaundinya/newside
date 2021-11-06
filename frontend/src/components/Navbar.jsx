@@ -14,6 +14,8 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { Search } from '@geist-ui/react-icons';
 import Image from '@geist-ui/react/esm/image/';
 import { mediaQuery } from '../utils/mediaQuery';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../store/slices/userSlice';
 // import useResponsiveWindow from '../hooks/useResponsiveWindow';
 
 function Navbar() {
@@ -22,6 +24,10 @@ function Navbar() {
     const [placement, setPlacement] = useState('');
     const [isMobile, setIsMobile] = useState(window.innerWidth < 475);
     // const { isMobile } = useResponsiveWindow();
+
+    const dispatch = useDispatch();
+
+    const user = useSelector((state) => state.user.user);
 
     const open = (text) => {
         setPlacement(text);
@@ -58,16 +64,20 @@ function Navbar() {
                         <strong>NewSide</strong>
                     </Text>
                 </Logo>
-                <User>
-                    <Avatar text='A' />
-                    {!isMobile ? (
-                        <Text p style={{ color: 'white' }}>
-                            User
-                        </Text>
-                    ) : (
-                        <></>
-                    )}
-                </User>
+                {user ? (
+                    <User>
+                        <Avatar text={user.username[0]} />
+                        {!isMobile ? (
+                            <Text p style={{ color: 'white' }}>
+                                {user.username}
+                            </Text>
+                        ) : (
+                            <></>
+                        )}
+                    </User>
+                ) : (
+                    <></>
+                )}
             </Nav>
             <StyledDrawer
                 visible={state}
@@ -130,13 +140,14 @@ function Navbar() {
                             </StyledNavLink>
                         </Text>
                         <Spacer h={4} />
-                        <Button type='success-light' width={'100%'}>
-                            <StyledNavLink
-                                style={{ color: 'white' }}
-                                to='/auth'
-                                activeClassName='active'>
-                                Login
-                            </StyledNavLink>
+                        <Button
+                            type={user ? 'error-light' : 'success-light'}
+                            width={'100%'}
+                            onClick={() => {
+                                dispatch(logout());
+                                history.push('/auth');
+                            }}>
+                            {user ? 'Logout' : 'Login'}
                         </Button>
                     </NavItems>
                 </StyledDrawer.Content>

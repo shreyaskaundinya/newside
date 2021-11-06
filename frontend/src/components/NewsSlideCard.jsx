@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function NewsSlideCard({ article }) {
+    const date = new Date(article.published_date).toDateString();
     return (
         <Card width={window.innerWidth < 475 ? '100%' : '300px'} shadow>
             <Card.Content>
@@ -17,7 +18,7 @@ function NewsSlideCard({ article }) {
                 </Text>
             </Card.Content>
             <StyledFooter>
-                <Text p>19th October 2021</Text>
+                <Text p>{date}</Text>
                 <Tag type='success'>
                     <Link to={`/topic/${article.topic.toLowerCase()}`}>
                         {article.topic}

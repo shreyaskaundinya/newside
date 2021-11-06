@@ -35,7 +35,7 @@ function Footer() {
                             <strong>TRENDING TOPICS</strong>
                         </Text>
                         {topics.map((topic) => (
-                            <Text p style={{ fontSize: '0.9em' }}>
+                            <Text p style={{ fontSize: '0.9em' }} key={topic}>
                                 <Link to={`/topic/${topic.toLowerCase()}`}>
                                     # {topic}
                                 </Link>
@@ -44,7 +44,7 @@ function Footer() {
                     </Col>
                     <Col style={{ paddingTop: '25px', paddingLeft: '6px' }}>
                         {topics1.map((topic) => (
-                            <Text p style={{ fontSize: '0.9em' }}>
+                            <Text p style={{ fontSize: '0.9em' }} key={topic}>
                                 <Link to={`/topic/${topic.toLowerCase()}`}>
                                     # {topic}
                                 </Link>
