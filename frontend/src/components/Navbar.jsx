@@ -1,13 +1,4 @@
-import {
-    Avatar,
-    Button,
-    Divider,
-    Drawer,
-    Input,
-    Spacer,
-    Text,
-} from '@geist-ui/react';
-import { Search } from '@geist-ui/react-icons';
+import { Avatar, Button, Divider, Drawer, Spacer, Text } from '@geist-ui/react';
 import AlignJustify from '@geist-ui/react-icons/alignJustify';
 import Image from '@geist-ui/react/esm/image/';
 import React, { useState } from 'react';
@@ -59,7 +50,7 @@ function Navbar() {
                         style={{
                             margin: 0,
                             color: 'white',
-                            fontSize: isMobile ? '1em' : '1.4em',
+                            fontSize: '1.4em',
                         }}>
                         <strong>NewSide</strong>
                     </Text>
@@ -83,26 +74,11 @@ function Navbar() {
                 visible={state}
                 onClose={() => setState(false)}
                 placement={placement}>
-                <StyledDrawer.Title>
-                    <Text h3 style={{ margin: 0, color: 'white' }}>
-                        NewSide
-                    </Text>
+                <StyledDrawer.Title style={{ margin: 0, color: 'white' }}>
+                    Newside
                 </StyledDrawer.Title>
                 <StyledDrawer.Content>
-                    <Input
-                        scale={4 / 3}
-                        placeholder='Search for topics...'
-                        width='100%'
-                        clearable
-                        onChange={handleSearchBar}
-                        style={{ color: 'white' }}
-                        iconRight={<Search />}
-                        iconClickable
-                        onIconClick={handleSearch}
-                        type='success'
-                    />
                     <NavItems>
-                        <Spacer h={3} />
                         <Text p>
                             <StyledNavLink to='/' activeClassName='active'>
                                 Home
@@ -161,7 +137,9 @@ export default Navbar;
 const StyledDrawer = styled(Drawer)`
     background-color: black !important;
     color: white !important;
+    min-width: 400px;
     ${mediaQuery('sm')} {
+        min-width: unset;
         max-width: 250px !important;
     }
 `;
@@ -175,6 +153,9 @@ const NavbarContainer = styled.div`
     color: white;
     z-index: 1000;
     border-radius: 5px;
+    ${mediaQuery('sm')} {
+        width: 96%;
+    }
 `;
 
 const Logo = styled.div`

@@ -28,11 +28,14 @@ export const appApi = createApi({
             providesTags: ['User'],
         }),
         updateUser: builder.mutation({
-            query: (user) => {
+            query: ({ username, interests, name, id }) => {
+                console.log(id);
                 return {
-                    url: 'userprofile',
-                    method: 'POST',
-                    body: { data: user },
+                    url: `user/${id}`,
+                    method: 'PUT',
+                    body: {
+                        data: { username, interests, name },
+                    },
                 };
             },
         }),

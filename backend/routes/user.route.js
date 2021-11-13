@@ -37,10 +37,24 @@ router
 
 */
 
+async function editUserById(req, res) {
+    const { username, interests, name } = req.body.data;
+    const userId = req.params.id;
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            { _id: userId },
+            { username, interests, name }
+        ).exec();
+        return res.status(200).json({ status: 200, user: updatedUser });
+    } catch (error) {
+        return res
+            .status(400)
+            .json({ status: 400, err: 'ERROR: Unable to edit profile.' });
+    }
+}
+
 async function getUserById(req, res) {
     const userId = req.params.id;
-
-    console.log(userId);
 
     try {
         const user = await User.findById(userId).exec();
@@ -81,6 +95,6 @@ router
     .get(getUserById)
     .post(notSupported)
     .delete(deleteUserById)
-    .put(notSupported);
+    .put(editUserById);
 
 module.exports = router;

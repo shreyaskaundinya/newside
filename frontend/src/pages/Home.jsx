@@ -8,6 +8,7 @@ import NewsSlides from '../components/NewsSlides';
 import Weather from '../components/Weather';
 import { useGetLatestArticlesQuery } from '../store/api/appApi';
 import { pushArticles } from '../store/slices/articlesSlice';
+import { mediaQuery } from '../utils/mediaQuery';
 import BasePage from './BasePage';
 
 function Home() {
@@ -67,6 +68,15 @@ const HeroContainer = styled(motion.div)`
     flex-direction: column;
     align-items: center;
     padding: 2rem;
+    ${mediaQuery('sm')} {
+        text-align: center;
+        h1 {
+            font-size: xx-large;
+        }
+        h2 {
+            font-size: x-large;
+        }
+    }
 `;
 
 const Section = styled.div``;

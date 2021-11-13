@@ -22,13 +22,13 @@ function NewsSlides({ limit = 100, title, articles, type = 'articles' }) {
                 }}>
                 {type === 'articles' ? (
                     <>
-                        {articles.slice(0, limit).map((article) => (
+                        {articles?.slice(0, limit).map((article) => (
                             <NewsSlideCard article={article} key={article.id} />
                         ))}
                     </>
                 ) : (
                     <>
-                        {articles.slice(0, limit).map((bookmark) => (
+                        {articles?.slice(0, limit).map((bookmark) => (
                             <NewsSlideCard
                                 article={bookmark.article}
                                 key={bookmark._id}

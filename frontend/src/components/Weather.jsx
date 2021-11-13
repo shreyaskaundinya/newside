@@ -1,13 +1,12 @@
+import { Card, Loading, Text, useToasts } from '@geist-ui/react';
+import Image from '@geist-ui/react/esm/image/';
+import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 // import Datetime from 'react-datetime';
 import styled from 'styled-components';
-import Image from '@geist-ui/react/esm/image/';
-import { Card, Loading, Text } from '@geist-ui/react';
-import { motion } from 'framer-motion';
-import { useSelector } from 'react-redux';
 import { useGetWeatherDataQuery } from '../store/api/appApi';
-
-import { useToasts } from '@geist-ui/react';
+import { mediaQuery } from '../utils/mediaQuery';
 
 function Weather(props) {
     const [toast, setToast] = useToasts();
@@ -113,16 +112,29 @@ const WeatherStyle = styled.form`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    ${mediaQuery('sm')} {
+        #location {
+            width: 100%;
+            text-align: center;
+        }
+    }
 `;
 
 const WeatherDayCard = styled.div`
     display: flex;
-    /* flex-direction: column; */
     flex-wrap: wrap;
     * {
         width: max-content;
     }
     gap: 2rem;
+    justify-content: space-around;
+
+    ${mediaQuery('sm')} {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 
 const Flex = styled.div`

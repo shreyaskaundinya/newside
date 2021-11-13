@@ -1,14 +1,13 @@
-import React, { useRef } from 'react';
+import { Loading, useToasts } from '@geist-ui/react';
+import Button from '@geist-ui/react/esm/button';
 import Card from '@geist-ui/react/esm/card';
 import Input from '@geist-ui/react/esm/input';
-import Button from '@geist-ui/react/esm/button';
-
+import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useLoginUserMutation } from '../store/api/appApi';
-import { useDispatch } from 'react-redux';
 import { login } from '../store/slices/userSlice';
-import { useHistory } from 'react-router-dom';
-import { Loading, useToasts } from '@geist-ui/react';
 
 function Login() {
     const [loginUser, { isLoading }] = useLoginUserMutation();
@@ -33,7 +32,7 @@ function Login() {
             })
             .catch((error) => {
                 // console.log(err);
-                setToast({ text: error.data.err, type: 'error' });
+                setToast({ text: error?.error, type: 'error' });
             });
     };
 
