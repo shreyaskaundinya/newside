@@ -12,7 +12,7 @@ const notSupported = (req, res) => {
 };
 
 async function getLatestArticles(req, res) {
-    const staleTime = 300000;
+    const staleTime = 300;
     const apiKey = process.env.NEWS_API_KEY;
     // console.log(apiKey);
     var diff;
