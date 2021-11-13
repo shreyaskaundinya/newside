@@ -1,9 +1,26 @@
+import { Card, Text } from '@geist-ui/react';
 import React from 'react';
-import { Text, Card } from '@geist-ui/react';
 import { Link } from 'react-router-dom';
 
 function Topics() {
-    const topics = ['News', 'Business', 'Sports', 'Tech', 'Crypto', 'Movies'];
+    const topics = [
+        'News',
+        'Sport',
+        'Tech',
+        'World',
+        'Finance',
+        'Politics',
+        'Business',
+        'Economics',
+        'Entertainment',
+        'Beauty',
+        'Travel',
+        'Music',
+        'Food',
+        'Science',
+        'Gaming',
+        'Energy',
+    ];
     return (
         <Card>
             <Card.Content>
@@ -14,7 +31,9 @@ function Topics() {
             <Card.Content>
                 {topics.map((topic) => (
                     <Text p style={{ textTransform: 'capitalize' }}>
-                        <Link to={`/topic/${topic}`}># {topic}</Link>
+                        <Link to={`/topic/${topic.toLowerCase()}`}>
+                            # {topic}
+                        </Link>
                     </Text>
                 ))}
             </Card.Content>

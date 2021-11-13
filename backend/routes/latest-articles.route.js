@@ -23,7 +23,7 @@ async function getLatestArticles(req, res) {
             .sort({ created: -1 })
             .limit(50)
             .exec();
-        console.log(articles.length);
+        //console.log(articles.length);
         if (articles.length > 0) {
             const ar = articles[0];
 
@@ -40,17 +40,17 @@ async function getLatestArticles(req, res) {
             // check with stale time
 
             var diff = currentTime - articleTime;
-            console.log(diff);
+            //console.log(diff);
 
             // if article is older than stale time -> return api call
         }
 
         if (diff > staleTime || articles.length <= 0) {
             try {
-                console.log('FETCHING DATA');
+                //console.log('FETCHING DATA');
                 axios
                     .get(
-                        `https://api.newscatcherapi.com/v2/latest_headlines?countries=US&topic=business&page_size=10`,
+                        `https://api.newscatcherapi.com/v2/latest_headlines?countries=US&topic=news&page_size=20&lang=en`,
                         {
                             headers: {
                                 'x-api-key': apiKey,
@@ -91,7 +91,7 @@ async function getLatestArticles(req, res) {
                     })
                     .catch((error) => console.log(error));
             } catch (error) {
-                console.log(error);
+                //console.log(error);
                 return res
                     .status(200)
                     .json({ status: 200, data: { articles } });
@@ -100,11 +100,11 @@ async function getLatestArticles(req, res) {
 
         // article is not stale -> return db call
         else {
-            console.log('else?');
-            return res.status(200).json({ staus: 200, articles: articles });
+            //console.log('else?');
+            return res.status(200).json({ status: 200, articles: articles });
         }
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         return res
             .status(400)
             .json({ status: 400, err: 'ERROR:News cant be displayed' });

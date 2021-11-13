@@ -20,7 +20,7 @@ async function loginUser(req, res) {
         } else {
             return res
                 .status(400)
-                .json({ status: 400, err: 'ERROR: laIncorrect password' });
+                .json({ status: 400, err: 'ERROR: Incorrect password' });
         }
     } catch {
         return res

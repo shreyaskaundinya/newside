@@ -5,7 +5,7 @@ export const appApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:4000/',
     }),
-    tagTypes: ['Articles', 'User', 'Comments'],
+    tagTypes: ['Articles', 'User', 'Comments', 'Bookmarks'],
     endpoints: (builder) => ({
         signupUser: builder.mutation({
             query: (user) => {
@@ -16,6 +16,7 @@ export const appApi = createApi({
                 };
             },
         }),
+
         loginUser: builder.mutation({
             query: (user) => {
                 return {
@@ -25,6 +26,15 @@ export const appApi = createApi({
                 };
             },
             providesTags: ['User'],
+        }),
+        updateUser: builder.mutation({
+            query: (user) => {
+                return {
+                    url: 'userprofile',
+                    method: 'POST',
+                    body: { data: user },
+                };
+            },
         }),
         getLatestArticles: builder.query({
             query: () => 'latest',
@@ -39,10 +49,11 @@ export const appApi = createApi({
                       ]
                     : ['Articles'],
         }),
+
         getArticleComments: builder.query({
             query: (id) => `articlecomments/${id}`,
             providesTags: (result) => {
-                return result.comments.length > 0
+                return result?.comments.length > 0
                     ? [
                           {
                               type: 'Comments',
@@ -53,6 +64,7 @@ export const appApi = createApi({
                     : ['Comments'];
             },
         }),
+
         addArticleComment: builder.mutation({
             query: (data) => ({
                 url: `articlecomments/${data.articleId}`,
@@ -69,6 +81,94 @@ export const appApi = createApi({
                     : [];
             },
         }),
+
+        getWeatherData: builder.query({
+            query: (location) => ({
+                url: `weather`,
+                method: 'POST',
+                body: { data: { location } },
+            }),
+        }),
+
+        getArticlesByTopic: builder.query({
+            query: ({ topic, page = 1 }) => {
+                console.log('fetching page', page);
+                return {
+                    url: `topicarticles/${topic}/${page}`,
+                    method: 'GET',
+                };
+            },
+            providesTags: (result, err, arg) =>
+                result
+                    ? [
+                          ...result.articles.map(({ _id }) => ({
+                              type: 'Articles',
+                              _id,
+                          })),
+                          'Articles',
+                      ]
+                    : ['Articles'],
+        }),
+
+        getArticlebyId: builder.query({
+            query: (id) => ({
+                url: `article/${id}`,
+                method: 'GET',
+            }),
+            providesTags: (result, err, arg) =>
+                result
+                    ? [
+                          { type: 'Articles', _id: result?.article?._id },
+                          'Articles',
+                      ]
+                    : [],
+        }),
+
+        getUserBookmarks: builder.query({
+            query: (id) => ({
+                url: `bookmark/${id}`,
+                method: 'GET',
+            }),
+            providesTags: (result, err) => {
+                return result && !err
+                    ? [
+                          ...result.bookmarks.map((bookmark) => {
+                              return {
+                                  type: 'Bookmarks',
+                                  _id: bookmark._id,
+                              };
+                          }),
+                          'Bookmarks',
+                      ]
+                    : [];
+            },
+        }),
+
+        updateBookmark: builder.mutation({
+            query: (data) => {
+                return {
+                    url: `bookmark/${data.userId}`,
+                    method: 'POST',
+                    body: { data: { articleId: data.articleId } },
+                };
+            },
+            invalidatesTags: (result) => {
+                return result
+                    ? [
+                          'Bookmarks',
+                          { type: 'Bookmarks', _id: result.data.bookmark._id },
+                      ]
+                    : [];
+            },
+        }),
+        getExploreArticles: builder.query({
+            query: () => {
+                return {
+                    url: `explore`,
+                    method: 'GET',
+                };
+            },
+        }),
     }),
 });
 
@@ -78,4 +178,11 @@ export const {
     useGetLatestArticlesQuery,
     useGetArticleCommentsQuery,
     useAddArticleCommentMutation,
+    useGetWeatherDataQuery,
+    useGetArticlesByTopicQuery,
+    useGetArticlebyIdQuery,
+    useUpdateBookmarkMutation,
+    useGetUserBookmarksQuery,
+    useUpdateUserMutation,
+    useGetExploreArticlesQuery,
 } = appApi;

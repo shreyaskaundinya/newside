@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Card from '@geist-ui/react/esm/card';
 import Input from '@geist-ui/react/esm/input';
 import Button from '@geist-ui/react/esm/button';
@@ -10,6 +10,19 @@ import { Loading, useToasts } from '@geist-ui/react';
 function SignUp() {
     const [signupUser, { isLoading }] = useSignupUserMutation();
     const [toast, setToast] = useToasts();
+    const [location, setLocation] = useState({
+        latitude: 0,
+        longitude: 0,
+    });
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((e) => {
+            setLocation(() => ({
+                latitude: e.coords.latitude,
+                longitude: e.coords.longitude,
+            }));
+        });
+    }, []);
 
     const form = useRef(null);
     var [interests, setInterests] = useState(null);
@@ -21,6 +34,7 @@ function SignUp() {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(form.current).entries());
         data.interests = interests;
+        data.location = location;
 
         if (data.password !== data.confirmPassword) {
             form.current.reset();
@@ -48,6 +62,17 @@ function SignUp() {
                         label='Confirm Password'
                         width='100%'
                         name='confirmPassword'
+                    />
+
+                    <Input
+                        disabled
+                        label='Latitude'
+                        value={location.latitude}
+                    />
+                    <Input
+                        disabled
+                        label='Longitude'
+                        value={location.longitude}
                     />
 
                     <Select

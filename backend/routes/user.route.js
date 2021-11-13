@@ -46,6 +46,10 @@ async function getUserById(req, res) {
         const user = await User.findById(userId).exec();
         if (user) {
             return res.status(200).json({ status: 200, data: { user: user } });
+        } else {
+            return res
+                .status(400)
+                .json({ status: 400, err: 'ERROR : User Not Found' });
         }
     } catch (error) {
         return res

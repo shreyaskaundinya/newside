@@ -1,11 +1,10 @@
+import Text from '@geist-ui/react/esm/text';
+import { motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
-import { news } from '../utils/sampleNews';
 import NewsSlideCard from './NewsSlideCard';
-import { motion } from 'framer-motion';
-import Text from '@geist-ui/react/esm/text';
 
-function NewsSlides({ limit = 100, title, articles }) {
+function NewsSlides({ limit = 100, title, articles, type = 'articles' }) {
     return (
         <>
             <Text h4>{title}</Text>
@@ -21,9 +20,22 @@ function NewsSlides({ limit = 100, title, articles }) {
                     duration: 0.5,
                     staggerChildren: 0.3,
                 }}>
-                {articles.slice(0, limit).map((article) => (
-                    <NewsSlideCard article={article} key={article.id} />
-                ))}
+                {type === 'articles' ? (
+                    <>
+                        {articles.slice(0, limit).map((article) => (
+                            <NewsSlideCard article={article} key={article.id} />
+                        ))}
+                    </>
+                ) : (
+                    <>
+                        {articles.slice(0, limit).map((bookmark) => (
+                            <NewsSlideCard
+                                article={bookmark.article}
+                                key={bookmark._id}
+                            />
+                        ))}
+                    </>
+                )}
             </SlidesContainer>
         </>
     );

@@ -27,7 +27,7 @@ async function addNewUser(req, res) {
     try {
         const salt = bcrypt.genSaltSync(10);
         data.password = bcrypt.hashSync(data.password, salt);
-
+        console.log(data);
         const newUser = await User.create(data);
         newUser.save();
         return res.status(200).json({ status: 200, data: { user } });

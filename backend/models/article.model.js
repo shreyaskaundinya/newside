@@ -6,6 +6,7 @@ var Article = new mongoose.Schema({
     },
     title: {
         type: String,
+        unique: true,
     },
     summary: {
         type: String,
@@ -14,7 +15,7 @@ var Article = new mongoose.Schema({
         type: String,
     },
     slug: {
-        type: Array,
+        type: String,
     },
     link: {
         type: String,
@@ -24,6 +25,10 @@ var Article = new mongoose.Schema({
     },
     published_date: {
         type: String,
+    },
+    created: {
+        type: Date,
+        default: Date.now,
     },
 });
 

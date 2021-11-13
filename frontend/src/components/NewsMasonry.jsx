@@ -1,14 +1,21 @@
+import { Loading } from '@geist-ui/react';
 import React from 'react';
 import styled from 'styled-components';
 import { news } from '../utils/sampleNews';
 import NewsMasonryCard from './NewsMasonryCard';
 
-function NewsMasonry(props) {
+function NewsMasonry({ articles, isLoading, isError }) {
     return (
         <Grid>
-            {news.map((article) => (
-                <NewsMasonryCard article={article} key={article._id} />
-            ))}
+            {isLoading ? (
+                <Loading />
+            ) : isError ? (
+                <>Error</>
+            ) : (
+                articles.map((article) => (
+                    <NewsMasonryCard article={article} key={article._id} />
+                ))
+            )}
         </Grid>
     );
 }

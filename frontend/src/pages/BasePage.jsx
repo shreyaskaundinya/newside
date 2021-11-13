@@ -1,8 +1,7 @@
+import { motion } from 'framer-motion';
 import React from 'react';
-
 import styled, { css } from 'styled-components';
 import { mediaQuery } from '../utils/mediaQuery';
-import { motion } from 'framer-motion';
 
 function BasePage(props) {
     return (
@@ -12,7 +11,7 @@ function BasePage(props) {
             animate={{ opacity: 1, y: '0' }}
             exit={{ opacity: 0, y: '100px' }}
             transition={{
-                duration: 1,
+                duration: 0.5,
             }}>
             {props.children}
         </Page>

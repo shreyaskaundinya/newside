@@ -1,5 +1,6 @@
+import { Divider, Image, Text } from '@geist-ui/react';
 import React from 'react';
-import { Text, Divider, Link, Image } from '@geist-ui/react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Footer() {
@@ -7,11 +8,11 @@ function Footer() {
     const topics1 = ['Tech', 'Crypto', 'Movies'];
 
     return (
-        <FooterContainer>
+        <FooterContainer id='footer'>
             <div>
                 <Logo>
                     <Image
-                        src='https://fontmeme.com/permalink/211102/f10cb435a58b8d131a961b0b8f1c3feb.png'
+                        src='https://fontmeme.com/permalink/211111/6bd2ba892e332d8478218cbfa438bc2b.png'
                         width='50px'
                     />
                 </Logo>
@@ -35,20 +36,21 @@ function Footer() {
                             <strong>TRENDING TOPICS</strong>
                         </Text>
                         {topics.map((topic) => (
-                            <Text p style={{ fontSize: '0.9em' }} key={topic}>
-                                <Link to={`/topic/${topic.toLowerCase()}`}>
+                            <Link to={`/topic/${topic.toLowerCase()}`}>
+                                <Text
+                                    p
+                                    style={{ fontSize: '0.9em' }}
+                                    key={topic}>
                                     # {topic}
-                                </Link>
-                            </Text>
+                                </Text>
+                            </Link>
                         ))}
                     </Col>
                     <Col style={{ paddingTop: '25px', paddingLeft: '6px' }}>
                         {topics1.map((topic) => (
-                            <Text p style={{ fontSize: '0.9em' }} key={topic}>
-                                <Link to={`/topic/${topic.toLowerCase()}`}>
-                                    # {topic}
-                                </Link>
-                            </Text>
+                            <Link to={`/topic/${topic.toLowerCase()}`}>
+                                #{topic}
+                            </Link>
                         ))}
                     </Col>
                 </Row>

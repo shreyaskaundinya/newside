@@ -6,10 +6,10 @@ import Comment from './Comment';
 
 function Comments({ articleId }) {
     const { data, isLoading } = useGetArticleCommentsQuery(articleId);
-    console.log('commentss', data);
     if (isLoading) {
         return <Loading />;
     }
+
     return (
         <div>
             <h5>

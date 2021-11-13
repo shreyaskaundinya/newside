@@ -1,27 +1,19 @@
-import './App.css';
-import Auth from './pages/Auth';
-import { GeistProvider, CssBaseline } from '@geist-ui/react';
-
+import { CssBaseline, GeistProvider } from '@geist-ui/react';
+import { AnimatePresence } from 'framer-motion';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import './App.css';
+import bgSvg from './assets/svgs/bg3.svg';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import UserProfile from './pages/UserProfile';
-import TopicNews from './pages/TopicNews';
+import Navbar from './components/Navbar';
+import ScrollToTop from './hooks/ScrollToTop';
 import Article from './pages/Article';
-import Explore from './pages/Explore';
+import Auth from './pages/Auth';
 import Bookmarks from './pages/Bookmarks';
 import Error404 from './pages/Error404';
-
-// import bgSvg from './assets/images/bg.png';
-// import bgSvg from './assets/svgs/bg.svg';
-import bgSvg from './assets/svgs/bg2.svg';
-
-import { AnimatePresence } from 'framer-motion';
-import ScrollToTop from './hooks/ScrollToTop';
-// const myTheme = {
-//     type: 'Custom',
-// };
+import Explore from './pages/Explore';
+import Home from './pages/Home';
+import TopicNews from './pages/TopicNews';
+import UserProfile from './pages/UserProfile';
 
 function App() {
     return (
@@ -33,8 +25,7 @@ function App() {
                     className='App'
                     style={{
                         backgroundImage: `url(${bgSvg})`,
-                        // width: '100vw',
-                        // height: '100vh',
+                        backgroundPosition: 'top',
                         backgroundRepeat: 'repeat',
                         backgroundSize: 'cover',
                     }}>

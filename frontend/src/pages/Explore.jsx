@@ -1,31 +1,82 @@
-import { Divider, Text } from '@geist-ui/react';
+import { Divider, Loading, Spacer, Tag, Text } from '@geist-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import NewsMasonry from '../components/NewsMasonry';
+import { useGetExploreArticlesQuery } from '../store/api/appApi';
 import BasePage from './BasePage';
 
-function Explore(props) {
-    const topics = ['News', 'Business', 'Sports', 'Tech', 'Crypto', 'Movies'];
-
+function Explore(req, res) {
+    const { data, isError, isLoading } = useGetExploreArticlesQuery();
+    const topics = [
+        'News',
+        'Sport',
+        'Tech',
+        'World',
+        'Finance',
+        'Politics',
+        'Business',
+        'Economics',
+        'Entertainment',
+        'Beauty',
+        'Travel',
+        'Music',
+        'Food',
+        'Science',
+        'Gaming',
+        'Energy',
+    ];
+    const topicsForNews = [
+        'News',
+        'Sport',
+        'Tech',
+        'Finance',
+        'Politics',
+        'Business',
+        'Entertainment',
+        'Science',
+    ];
+    console.log(data);
     return (
         <BasePage>
-            <Text h1>Explore</Text>
-            <Divider y={0} style={{ marginBottom: '2rem' }} />
-            <Text p style={{ margin: 0 }}>
-                Explore some topics :{' '}
+            <Text h1 style={{ textAlign: 'center' }}>
+                Explore some topics
             </Text>
+            <Divider y={0} h={5} />
+            <Spacer h={4} />
             <Topics>
                 {topics.map((topic) => (
-                    <Text p>
-                        <Link to={`/topic/${topic.toLowerCase()}`}>
+                    <Link to={`/topic/${topic.toLowerCase()}`} key={topic}>
+                        <Tag type='dark' invert key={topic}>
                             # {topic}
-                        </Link>
-                    </Text>
+                        </Tag>
+                    </Link>
                 ))}
             </Topics>
+            <Spacer h={6} />
             <Container>
-                <NewsMasonry />
+                {isLoading ? (
+                    <>
+                        <Loading />
+                    </>
+                ) : isError ? (
+                    <>Error</>
+                ) : (
+                    <>
+                        {topicsForNews.map((topic, index) => {
+                            return (
+                                <>
+                                    <Text h3>#{topic.toUpperCase()}</Text>
+                                    <NewsMasonry
+                                        articles={data?.topicsNews[index]}
+                                    />
+                                    <Divider h={3} />
+                                </>
+                            );
+                        })}
+                        {/* <NewsMasonry articles={data?.topicsNews} /> */}
+                    </>
+                )}
             </Container>
         </BasePage>
     );
@@ -43,4 +94,8 @@ const Topics = styled.div`
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    flex-wrap: wrap;
+    max-width: 768px;
+    margin: 0 auto;
+    justify-content: space-between;
 `;

@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 var Bookmark = new mongoose.Schema({
     userId: {
-        type: String,
+        type: mongoose.Types.ObjectId,
     },
     articleId: {
-        type: String,
+        type: mongoose.Types.ObjectId,
     },
     created: {
         type: Date,

@@ -17,7 +17,6 @@ async function getCommentsForArticleById(req, res) {
         const comments = await Comment.find({
             articleId: mongoose.Types.ObjectId(articleId),
         }).exec();
-        // console.log('COMMENTSSSS', comments);
         return res.status(200).json({ status: 200, comments: comments });
     } catch (error) {
         return res

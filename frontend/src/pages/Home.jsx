@@ -1,20 +1,20 @@
 import { Button, Loading, Spacer, Text } from '@geist-ui/react';
+import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import NewsSlides from '../components/NewsSlides';
 import Weather from '../components/Weather';
-import BasePage from './BasePage';
-import { motion } from 'framer-motion';
-import { news } from '../utils/sampleNews';
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { useGetLatestArticlesQuery } from '../store/api/appApi';
 import { pushArticles } from '../store/slices/articlesSlice';
+import BasePage from './BasePage';
 
 function Home() {
     const history = useHistory();
     const { data, isLoading } = useGetLatestArticlesQuery();
     const user = useSelector((state) => state.user.user);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -50,15 +50,12 @@ function Home() {
                 ) : (
                     <NewsSlides
                         title='Breaking News'
-                        limit={9}
-                        articles={data.articles}
+                        limit={16}
+                        articles={data?.articles}
                     />
                 )}
             </Section>
             <Spacer h={4} />
-            <Section>
-                <NewsSlides title='Trending News' limit={6} articles={news} />
-            </Section>
         </BasePage>
     );
 }

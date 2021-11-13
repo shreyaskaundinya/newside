@@ -7,15 +7,15 @@ import {
     Spacer,
     Text,
 } from '@geist-ui/react';
-import React, { useState } from 'react';
-import AlignJustify from '@geist-ui/react-icons/alignJustify';
-import styled from 'styled-components';
-import { NavLink, useHistory } from 'react-router-dom';
 import { Search } from '@geist-ui/react-icons';
+import AlignJustify from '@geist-ui/react-icons/alignJustify';
 import Image from '@geist-ui/react/esm/image/';
-import { mediaQuery } from '../utils/mediaQuery';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import { logout } from '../store/slices/userSlice';
+import { mediaQuery } from '../utils/mediaQuery';
 // import useResponsiveWindow from '../hooks/useResponsiveWindow';
 
 function Navbar() {
@@ -50,7 +50,7 @@ function Navbar() {
                 <Logo>
                     <AlignJustify onClick={() => open('left')} />
                     <Image
-                        src='https://fontmeme.com/permalink/211102/f10cb435a58b8d131a961b0b8f1c3feb.png'
+                        src='https://fontmeme.com/permalink/211111/6bd2ba892e332d8478218cbfa438bc2b.png'
                         width={!isMobile ? '50px' : '40px'}
                         style={{ margin: 0 }}
                     />
@@ -170,7 +170,7 @@ const NavbarContainer = styled.div`
     position: sticky;
     top: 1%;
     width: 99%;
-    margin: 0.5% auto;
+    margin: 0 auto;
     background-color: black;
     color: white;
     z-index: 1000;
