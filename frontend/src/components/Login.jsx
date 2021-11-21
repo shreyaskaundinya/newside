@@ -31,8 +31,8 @@ function Login() {
                 history.push('/');
             })
             .catch((error) => {
-                // console.log(err);
-                setToast({ text: error?.error, type: 'error' });
+                console.log(error);
+                setToast({ text: error?.data?.err, type: 'error' });
             });
     };
 

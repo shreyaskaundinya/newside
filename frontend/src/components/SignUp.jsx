@@ -30,8 +30,7 @@ function SignUp() {
         return <Loading />;
     }
 
-    const handleSignup = (e) => {
-        e.preventDefault();
+    const handleSignup = async (e) => {
         const data = Object.fromEntries(new FormData(form.current).entries());
         data.interests = interests;
         data.location = location;
@@ -40,9 +39,20 @@ function SignUp() {
             form.current.reset();
             setToast({ text: 'Passwords did not match!', type: 'warning' });
         } else {
-            // console.log(data);
             delete data.confirmPassword;
-            signupUser(data);
+            const resp = await signupUser(data);
+            // console.log(resp);
+            if (resp?.error?.status === 400) {
+                setToast({
+                    text: 'Duplicate User',
+                    type: 'error',
+                });
+            } else {
+                setToast({
+                    text: 'Successfully created account! Login to continue...',
+                    type: 'success',
+                });
+            }
         }
     };
 

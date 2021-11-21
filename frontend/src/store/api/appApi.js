@@ -27,6 +27,7 @@ export const appApi = createApi({
             },
             providesTags: ['User'],
         }),
+
         updateUser: builder.mutation({
             query: ({ username, interests, name, id }) => {
                 console.log(id);
@@ -39,6 +40,7 @@ export const appApi = createApi({
                 };
             },
         }),
+
         getLatestArticles: builder.query({
             query: () => 'latest',
             providesTags: (result, err, arg) =>
@@ -164,6 +166,7 @@ export const appApi = createApi({
                     : [];
             },
         }),
+
         getExploreArticles: builder.query({
             query: () => {
                 return {

@@ -30,7 +30,7 @@ function Topics() {
             </Card.Content>
             <Card.Content>
                 {topics.map((topic) => (
-                    <Text p style={{ textTransform: 'capitalize' }}>
+                    <Text p style={{ textTransform: 'capitalize' }} key={topic}>
                         <Link to={`/topic/${topic.toLowerCase()}`}>
                             # {topic}
                         </Link>

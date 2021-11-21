@@ -38,6 +38,7 @@ const userSlice = createSlice({
         updateUser: (state, action) => {
             state.user.username = action.payload.username;
             state.user.interests = action.payload.interests;
+            state.user.name = action.payload.name;
             localStorage.setItem(
                 'newside-user',
                 JSON.stringify({ ...state.user, password: '' })

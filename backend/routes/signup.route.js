@@ -30,8 +30,9 @@ async function addNewUser(req, res) {
         console.log(data);
         const newUser = await User.create(data);
         newUser.save();
-        return res.status(200).json({ status: 200, data: { user } });
+        return res.status(200).json({ status: 200, data: { newUser } });
     } catch (error) {
+        console.log(error);
         return res.status(400).json({ status: 400, err: 'ERROR' });
     }
 }

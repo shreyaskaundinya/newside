@@ -108,13 +108,6 @@ function Navbar() {
                             </StyledNavLink>
                         </Text>
                         <Divider style={{ backgroundColor: 'white' }} />
-                        <Text p>
-                            <StyledNavLink
-                                to='/aboutus'
-                                activeClassName='active'>
-                                About Us
-                            </StyledNavLink>
-                        </Text>
                         <Spacer h={4} />
                         <Button
                             type={user ? 'error-light' : 'success-light'}

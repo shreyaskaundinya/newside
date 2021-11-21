@@ -66,7 +66,11 @@ function Explore(req, res) {
                         {topicsForNews.map((topic, index) => {
                             return (
                                 <>
-                                    <Text h3>#{topic.toUpperCase()}</Text>
+                                    <Link
+                                        to={`/topic/${topic.toLowerCase()}`}
+                                        className='link'>
+                                        #{topic.toUpperCase()}
+                                    </Link>
                                     <NewsMasonry
                                         articles={data?.topicsNews[index]}
                                     />
@@ -74,7 +78,6 @@ function Explore(req, res) {
                                 </>
                             );
                         })}
-                        {/* <NewsMasonry articles={data?.topicsNews} /> */}
                     </>
                 )}
             </Container>
@@ -88,6 +91,14 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    a {
+        color: black;
+    }
+    .link {
+        color: black;
+        font-weight: 700;
+        font-size: xx-large;
+    }
 `;
 
 const Topics = styled.div`

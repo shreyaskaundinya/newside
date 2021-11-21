@@ -12,7 +12,7 @@ function Bookmarks() {
     const user = useSelector((state) => state.user.user);
 
     const { data, error, isLoading, isSuccess } = useGetUserBookmarksQuery(
-        user._id
+        user?._id
     );
 
     const dispatch = useDispatch();

@@ -39,7 +39,7 @@ function Article() {
     );
 
     const isBookmarked = useSelector((state) => {
-        console.log(find(state.user.bookmarks, { _id: id }));
+        // console.log(find(state.user.bookmarks, { _id: id }));
         return find(state.user.bookmarks, { articleId: id }) ? true : false;
     });
 
