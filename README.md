@@ -1,5 +1,9 @@
 # Newsside - News app using the NY Times API and MERN Stack
 
+## Data flow Diagram
+
+![data flow image](https://github.com/shreyaskaundinya/newside/blob/main/assets/newside-data-flow.drawio.png?raw=true)
+
 ## Git Commands / Git branch strategy
 
 ### If you're a contributor, steps to start contributing :
