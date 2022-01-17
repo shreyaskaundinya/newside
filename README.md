@@ -1,5 +1,10 @@
 # Newsside - News app using the NY Times API and MERN Stack
 
+
+## Wireframes
+
+![Check the wireframes here!](https://github.com/shreyaskaundinya/newside/blob/main/assets/newside-wireframes_PES1UG20CS415_405_409.pdf)
+
 ## Data flow Diagram
 
 ![data flow image](https://github.com/shreyaskaundinya/newside/blob/main/assets/newside-data-flow.drawio.png?raw=true)
